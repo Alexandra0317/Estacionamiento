@@ -50,6 +50,11 @@ public class Ingresar extends javax.swing.JPanel {
         lbDescripcion = new javax.swing.JLabel();
         txtDescripcion = new javax.swing.JTextField();
 
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setMaximumSize(new java.awt.Dimension(440, 410));
+        setMinimumSize(new java.awt.Dimension(440, 410));
+        setPreferredSize(new java.awt.Dimension(440, 410));
+
         jButton5.setText("<");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,7 +90,7 @@ public class Ingresar extends javax.swing.JPanel {
         lbH_Llegada.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbH_Llegada.setText("Hora de llegada");
 
-        jPanel22.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel22.setBackground(new java.awt.Color(44, 62, 80));
 
         lbTitulo3.setBackground(new java.awt.Color(255, 255, 255));
         lbTitulo3.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
@@ -144,7 +149,7 @@ public class Ingresar extends javax.swing.JPanel {
                     .addComponent(lbH_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(23, 23, 23)
+                            .addGap(66, 66, 66)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(lbTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,13 +169,12 @@ public class Ingresar extends javax.swing.JPanel {
                     .addComponent(txtMarca, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtPlacas, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtPropietario, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtH_Llegada, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
-                        .addComponent(txtH_Salida, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtTotal, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtDescripcion, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(txtH_Llegada, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+                    .addComponent(txtH_Salida, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTotal, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtDescripcion, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cboxTipo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,6 +224,9 @@ public class Ingresar extends javax.swing.JPanel {
                     .addComponent(jButton5))
                 .addGap(16, 16, 16))
         );
+
+        getAccessibleContext().setAccessibleName("");
+        getAccessibleContext().setAccessibleDescription("");
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -232,8 +239,6 @@ public class Ingresar extends javax.swing.JPanel {
     private javax.swing.JButton btnCancelar1;
     private javax.swing.JButton btnGuardar1;
     private javax.swing.JComboBox<String> cboxTipo;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JPanel jPanel22;
     private javax.swing.JLabel lbColor;

@@ -44,7 +44,7 @@ public class Precios_Establecidos extends javax.swing.JPanel {
         lbPlacas.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbPlacas.setText("Costo X Hora");
 
-        jPanel22.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel22.setBackground(new java.awt.Color(44, 62, 80));
 
         lbTitulo3.setBackground(new java.awt.Color(255, 255, 255));
         lbTitulo3.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N

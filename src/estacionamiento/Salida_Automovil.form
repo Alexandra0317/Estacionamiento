@@ -17,58 +17,60 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jPanel22" alignment="0" max="32767" attributes="0"/>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="jButton5" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="btnGuardar1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnCancelar1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="lbDescripcion" alignment="1" min="-2" pref="74" max="-2" attributes="0"/>
-                  <Component id="lbH_Salida" alignment="1" min="-2" pref="89" max="-2" attributes="0"/>
-                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="lbTotal" alignment="1" min="-2" pref="74" max="-2" attributes="0"/>
-                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                  <Component id="lbPropietario" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
-                                  <Component id="lbPlacas" alignment="1" min="-2" pref="86" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnGuardar1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnCancelar1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="lbDescripcion" alignment="1" min="-2" pref="74" max="-2" attributes="0"/>
+                          <Component id="lbH_Salida" alignment="1" min="-2" pref="89" max="-2" attributes="0"/>
+                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="lbTotal" alignment="1" min="-2" pref="74" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                          <Component id="lbPropietario" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
+                                          <Component id="lbPlacas" alignment="1" min="-2" pref="86" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                          <Component id="lbColor" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
+                                          <Component id="lbMarca" alignment="0" min="-2" pref="86" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="lbTipo" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbH_Llegada" alignment="1" min="-2" pref="103" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                  <Component id="lbColor" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
-                                  <Component id="lbMarca" alignment="0" min="-2" pref="86" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="lbTipo" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbH_Llegada" alignment="1" min="-2" pref="103" max="-2" attributes="0"/>
-                          </Group>
+                      <EmptySpace type="unrelated" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="txtColor" alignment="0" pref="294" max="32767" attributes="0"/>
+                          <Component id="txtMarca" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtPlacas" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtPropietario" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtH_Llegada" alignment="0" pref="294" max="32767" attributes="0"/>
+                          <Component id="txtH_Salida" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtTotal" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtDescripcion" alignment="0" max="32767" attributes="0"/>
+                          <Component id="cboxTipo" alignment="0" min="-2" pref="244" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace type="unrelated" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="txtColor" alignment="0" pref="294" max="32767" attributes="0"/>
-                  <Component id="txtMarca" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtPlacas" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtPropietario" alignment="0" max="32767" attributes="0"/>
-                  <Group type="103" alignment="1" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="txtH_Llegada" alignment="0" pref="294" max="32767" attributes="0"/>
-                      <Component id="txtH_Salida" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtTotal" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtDescripcion" alignment="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Component id="cboxTipo" alignment="0" min="-2" pref="244" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="40" max="32767" attributes="0"/>
+              <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -208,7 +210,7 @@
     <Container class="javax.swing.JPanel" name="jPanel22">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="66" green="66" red="0" type="rgb"/>
+          <Color blue="50" green="3e" red="2c" type="rgb"/>
         </Property>
       </Properties>
 
