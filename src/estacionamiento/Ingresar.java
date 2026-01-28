@@ -26,7 +26,6 @@ public class Ingresar extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton5 = new javax.swing.JButton();
         lbPropietario = new javax.swing.JLabel();
         txtMarca = new javax.swing.JTextField();
         lbPlacas = new javax.swing.JLabel();
@@ -39,7 +38,7 @@ public class Ingresar extends javax.swing.JPanel {
         btnCancelar1 = new javax.swing.JButton();
         txtH_Llegada = new javax.swing.JTextField();
         lbH_Llegada = new javax.swing.JLabel();
-        jPanel22 = new javax.swing.JPanel();
+        pnTitulo = new javax.swing.JPanel();
         lbTitulo3 = new javax.swing.JLabel();
         lbTipo = new javax.swing.JLabel();
         lbH_Salida = new javax.swing.JLabel();
@@ -50,17 +49,11 @@ public class Ingresar extends javax.swing.JPanel {
         lbDescripcion = new javax.swing.JLabel();
         txtDescripcion = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(178, 190, 195));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMaximumSize(new java.awt.Dimension(440, 410));
         setMinimumSize(new java.awt.Dimension(440, 410));
         setPreferredSize(new java.awt.Dimension(440, 410));
-
-        jButton5.setText("<");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
 
         lbPropietario.setFont(new java.awt.Font("Segoe UI Semibold", 1, 12)); // NOI18N
         lbPropietario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -90,28 +83,29 @@ public class Ingresar extends javax.swing.JPanel {
         lbH_Llegada.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbH_Llegada.setText("Hora de llegada");
 
-        jPanel22.setBackground(new java.awt.Color(44, 62, 80));
+        pnTitulo.setBackground(new java.awt.Color(44, 62, 80));
+        pnTitulo.setPreferredSize(new java.awt.Dimension(214, 55));
 
         lbTitulo3.setBackground(new java.awt.Color(255, 255, 255));
         lbTitulo3.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
         lbTitulo3.setForeground(new java.awt.Color(255, 255, 255));
         lbTitulo3.setText("NUEVO AUTOMOVIL");
 
-        javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
-        jPanel22.setLayout(jPanel22Layout);
-        jPanel22Layout.setHorizontalGroup(
-            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel22Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+        javax.swing.GroupLayout pnTituloLayout = new javax.swing.GroupLayout(pnTitulo);
+        pnTitulo.setLayout(pnTituloLayout);
+        pnTituloLayout.setHorizontalGroup(
+            pnTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTituloLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addComponent(lbTitulo3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel22Layout.setVerticalGroup(
-            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel22Layout.createSequentialGroup()
-                .addContainerGap()
+        pnTituloLayout.setVerticalGroup(
+            pnTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnTituloLayout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
                 .addComponent(lbTitulo3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(16, 16, 16))
         );
 
         lbTipo.setFont(new java.awt.Font("Segoe UI Semibold", 1, 12)); // NOI18N
@@ -134,11 +128,9 @@ public class Ingresar extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnGuardar1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCancelar1)
@@ -163,25 +155,25 @@ public class Ingresar extends javax.swing.JPanel {
                                     .addComponent(lbMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(lbTipo, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(lbH_Llegada, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtColor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
-                    .addComponent(txtMarca, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPlacas, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPropietario, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtH_Llegada, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
-                    .addComponent(txtH_Salida, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTotal, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDescripcion, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cboxTipo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtPropietario, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPlacas, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtH_Llegada, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtH_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbPropietario)
                     .addComponent(txtPropietario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -220,8 +212,7 @@ public class Ingresar extends javax.swing.JPanel {
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar1)
-                    .addComponent(btnCancelar1)
-                    .addComponent(jButton5))
+                    .addComponent(btnCancelar1))
                 .addGap(16, 16, 16))
         );
 
@@ -229,18 +220,11 @@ public class Ingresar extends javax.swing.JPanel {
         getAccessibleContext().setAccessibleDescription("");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-//        Interfaz.Pantalla.setVisible(true);
-//        this.setVisible(false);
-    }//GEN-LAST:event_jButton5ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar1;
     private javax.swing.JButton btnGuardar1;
     private javax.swing.JComboBox<String> cboxTipo;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JPanel jPanel22;
     private javax.swing.JLabel lbColor;
     private javax.swing.JLabel lbDescripcion;
     private javax.swing.JLabel lbH_Llegada;
@@ -251,6 +235,7 @@ public class Ingresar extends javax.swing.JPanel {
     private javax.swing.JLabel lbTipo;
     private javax.swing.JLabel lbTitulo3;
     private javax.swing.JLabel lbTotal;
+    private javax.swing.JPanel pnTitulo;
     private javax.swing.JTextField txtColor;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtH_Llegada;

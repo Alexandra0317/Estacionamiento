@@ -12,8 +12,15 @@ public class Principal extends javax.swing.JFrame {
     Usuario ur = new Usuario();
 
 
-    public Principal() {
+    public Principal(String rol) {
         initComponents();
+        if(rol != "ADMIN"){
+            btnPrecios.setEnabled(true);
+            btnPrecios.setVisible(false);
+            btnNuevoUsuario.setEnabled(true);
+            btnNuevoUsuario.setVisible(false);
+            
+        }
         this.setExtendedState(this.MAXIMIZED_BOTH);
     }
 
@@ -28,18 +35,19 @@ public class Principal extends javax.swing.JFrame {
         btnIngresar = new javax.swing.JButton();
         btnInicio = new javax.swing.JButton();
         btnPrecios = new javax.swing.JButton();
+        lbBienvenida = new javax.swing.JLabel();
         pnInicio = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        tbAutomoviles = new javax.swing.JTable();
+        txtBuscar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(500, 410));
 
         pnBarra.setBackground(new java.awt.Color(44, 62, 80));
         pnBarra.setForeground(new java.awt.Color(0, 102, 204));
-        pnBarra.setPreferredSize(new java.awt.Dimension(310, 0));
+        pnBarra.setPreferredSize(new java.awt.Dimension(350, 0));
 
         btnSalida.setBackground(new java.awt.Color(44, 62, 80));
         btnSalida.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
@@ -70,7 +78,7 @@ public class Principal extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(44, 62, 80));
         jButton1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("jButton1");
+        jButton1.setText("CERRAR SESIÓN");
         jButton1.setBorder(null);
         jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -118,6 +126,9 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        lbBienvenida.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+        lbBienvenida.setForeground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout pnBarraLayout = new javax.swing.GroupLayout(pnBarra);
         pnBarra.setLayout(pnBarraLayout);
         pnBarraLayout.setHorizontalGroup(
@@ -125,37 +136,38 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(pnBarraLayout.createSequentialGroup()
                 .addGroup(pnBarraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnBarraLayout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addGroup(pnBarraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnIngresar)
-                            .addComponent(btnPrecios, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnBarraLayout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(btnInicio))
-                    .addGroup(pnBarraLayout.createSequentialGroup()
                         .addGap(103, 103, 103)
-                        .addComponent(jButton1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton1))
+                    .addGroup(pnBarraLayout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addGroup(pnBarraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnPrecios)
+                            .addComponent(btnSalida)
+                            .addComponent(btnIngresar)
+                            .addComponent(btnInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnNuevoUsuario))))
+                .addContainerGap(58, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnBarraLayout.createSequentialGroup()
-                .addGap(0, 34, Short.MAX_VALUE)
-                .addComponent(btnNuevoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lbBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
         );
         pnBarraLayout.setVerticalGroup(
             pnBarraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnBarraLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addGap(36, 36, 36)
+                .addComponent(lbBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
                 .addComponent(btnInicio)
                 .addGap(50, 50, 50)
                 .addComponent(btnIngresar)
-                .addGap(49, 49, 49)
+                .addGap(56, 56, 56)
                 .addComponent(btnSalida)
-                .addGap(66, 66, 66)
+                .addGap(60, 60, 60)
                 .addComponent(btnPrecios)
                 .addGap(63, 63, 63)
                 .addComponent(btnNuevoUsuario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(41, 41, 41))
         );
@@ -166,28 +178,30 @@ public class Principal extends javax.swing.JFrame {
         pnInicio.setPreferredSize(new java.awt.Dimension(100, 100));
         pnInicio.setLayout(null);
 
-        jButton2.setText("Buscar");
-        pnInicio.add(jButton2);
-        jButton2.setBounds(795, 56, 72, 23);
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        pnInicio.add(btnBuscar);
+        btnBuscar.setBounds(795, 56, 72, 23);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbAutomoviles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "ID", "Tipo ", "Costo x horas", "Descripción"
             }
         ));
-        jTable1.setPreferredSize(new java.awt.Dimension(500, 150));
-        jScrollPane1.setViewportView(jTable1);
+        tbAutomoviles.setPreferredSize(new java.awt.Dimension(500, 150));
+        jScrollPane1.setViewportView(tbAutomoviles);
 
         pnInicio.add(jScrollPane1);
-        jScrollPane1.setBounds(77, 97, 1070, 610);
-        pnInicio.add(jTextField1);
-        jTextField1.setBounds(490, 56, 299, 22);
+        jScrollPane1.setBounds(80, 120, 1070, 610);
+        pnInicio.add(txtBuscar);
+        txtBuscar.setBounds(490, 56, 299, 22);
 
         getContentPane().add(pnInicio, java.awt.BorderLayout.CENTER);
 
@@ -235,12 +249,18 @@ public class Principal extends javax.swing.JFrame {
         pe.setVisible(true);
     }//GEN-LAST:event_btnPreciosActionPerformed
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
     private void isVisiblePanels() {
         this.pnInicio.setVisible(false);
         this.ig.setVisible(false);
         this.sa.setVisible(false);
         this.pe.setVisible(false);
         this.ur.setVisible(false);
+        this.ur.pnUsuario.setVisible(false);
+        this.pe.pnPrecio.setVisible(false);
     }
 
     /**
@@ -273,23 +293,24 @@ public class Principal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Principal().setVisible(true);
+                new Principal("ADMIN").setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnIngresar;
     private javax.swing.JButton btnInicio;
     private javax.swing.JButton btnNuevoUsuario;
     private javax.swing.JButton btnPrecios;
     private javax.swing.JButton btnSalida;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    public static javax.swing.JLabel lbBienvenida;
     private javax.swing.JPanel pnBarra;
     private javax.swing.JPanel pnInicio;
+    private javax.swing.JTable tbAutomoviles;
+    private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }
