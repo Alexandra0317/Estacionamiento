@@ -41,13 +41,15 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbAutomoviles = new javax.swing.JTable();
         txtBuscar = new javax.swing.JTextField();
+        pnTitulo = new javax.swing.JPanel();
+        lbTitulo3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(500, 410));
 
         pnBarra.setBackground(new java.awt.Color(44, 62, 80));
         pnBarra.setForeground(new java.awt.Color(0, 102, 204));
-        pnBarra.setPreferredSize(new java.awt.Dimension(350, 0));
+        pnBarra.setPreferredSize(new java.awt.Dimension(370, 0));
 
         btnSalida.setBackground(new java.awt.Color(44, 62, 80));
         btnSalida.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
@@ -146,7 +148,7 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(btnIngresar)
                             .addComponent(btnInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnNuevoUsuario))))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnBarraLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(lbBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,7 +169,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(btnPrecios)
                 .addGap(63, 63, 63)
                 .addComponent(btnNuevoUsuario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(41, 41, 41))
         );
@@ -185,23 +187,52 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         pnInicio.add(btnBuscar);
-        btnBuscar.setBounds(795, 56, 72, 23);
+        btnBuscar.setBounds(1030, 100, 72, 23);
 
         tbAutomoviles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Tipo ", "Costo x horas", "Descripción"
+                "ID_auto", "Propietario", "Placas", "Marca", "Color", "Descripcion", "Hora_llegada"
             }
         ));
+        tbAutomoviles.setToolTipText("");
         tbAutomoviles.setPreferredSize(new java.awt.Dimension(500, 150));
         jScrollPane1.setViewportView(tbAutomoviles);
 
         pnInicio.add(jScrollPane1);
-        jScrollPane1.setBounds(80, 120, 1070, 610);
+        jScrollPane1.setBounds(40, 140, 1070, 610);
         pnInicio.add(txtBuscar);
-        txtBuscar.setBounds(490, 56, 299, 22);
+        txtBuscar.setBounds(710, 100, 299, 22);
+
+        pnTitulo.setBackground(new java.awt.Color(44, 62, 80));
+        pnTitulo.setPreferredSize(new java.awt.Dimension(368, 55));
+
+        lbTitulo3.setBackground(new java.awt.Color(255, 255, 255));
+        lbTitulo3.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 36)); // NOI18N
+        lbTitulo3.setForeground(new java.awt.Color(255, 255, 255));
+        lbTitulo3.setText("ESTACIONAMIENTO");
+
+        javax.swing.GroupLayout pnTituloLayout = new javax.swing.GroupLayout(pnTitulo);
+        pnTitulo.setLayout(pnTituloLayout);
+        pnTituloLayout.setHorizontalGroup(
+            pnTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnTituloLayout.createSequentialGroup()
+                .addContainerGap(727, Short.MAX_VALUE)
+                .addComponent(lbTitulo3, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(131, 131, 131))
+        );
+        pnTituloLayout.setVerticalGroup(
+            pnTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTituloLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbTitulo3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pnInicio.add(pnTitulo);
+        pnTitulo.setBounds(0, 20, 1230, 55);
 
         getContentPane().add(pnInicio, java.awt.BorderLayout.CENTER);
 
@@ -308,8 +339,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JLabel lbBienvenida;
+    private javax.swing.JLabel lbTitulo3;
     private javax.swing.JPanel pnBarra;
     private javax.swing.JPanel pnInicio;
+    private javax.swing.JPanel pnTitulo;
     private javax.swing.JTable tbAutomoviles;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables

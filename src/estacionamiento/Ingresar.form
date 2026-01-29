@@ -139,7 +139,7 @@
                   <Component id="lbDescripcion" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtDescripcion" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="32767" attributes="0"/>
+              <EmptySpace type="separate" pref="78" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnGuardar1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnCancelar1" alignment="3" min="-2" max="-2" attributes="0"/>
