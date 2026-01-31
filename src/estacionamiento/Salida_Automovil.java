@@ -61,6 +61,7 @@ public class Salida_Automovil extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(178, 190, 195));
+        setPreferredSize(new java.awt.Dimension(1221, 831));
 
         lbColor.setFont(new java.awt.Font("Segoe UI Semibold", 1, 12)); // NOI18N
         lbColor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);

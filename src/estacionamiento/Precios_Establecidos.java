@@ -89,6 +89,7 @@ public class Precios_Establecidos extends javax.swing.JPanel {
                 .addGap(16, 16, 16))
         );
 
+        tbPrecios.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tbPrecios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -97,6 +98,7 @@ public class Precios_Establecidos extends javax.swing.JPanel {
                 "Id", "Tipo de vehiculo", "Precio x Hora", "Descripcion"
             }
         ));
+        tbPrecios.setRowHeight(35);
         jScrollPane1.setViewportView(tbPrecios);
 
         pnPrecio.setBackground(new java.awt.Color(178, 190, 195));

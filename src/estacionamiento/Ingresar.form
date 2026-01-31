@@ -15,7 +15,7 @@
       <Dimension value="[440, 410]"/>
     </Property>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[440, 410]"/>
+      <Dimension value="[1221, 831]"/>
     </Property>
   </Properties>
   <AccessibilityProperties>
@@ -37,7 +37,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="pnTitulo" alignment="0" pref="554" max="32767" attributes="0"/>
+          <Component id="pnTitulo" alignment="0" pref="470" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Component id="btnGuardar1" min="-2" max="-2" attributes="0"/>
@@ -139,7 +139,7 @@
                   <Component id="lbDescripcion" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtDescripcion" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" pref="78" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnGuardar1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnCancelar1" alignment="3" min="-2" max="-2" attributes="0"/>

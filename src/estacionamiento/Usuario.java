@@ -56,8 +56,9 @@ public class Usuario extends javax.swing.JPanel {
         btnCargarDatos = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(178, 190, 195));
-        setMinimumSize(new java.awt.Dimension(565, 398));
-        setPreferredSize(new java.awt.Dimension(100, 100));
+        setMinimumSize(new java.awt.Dimension(0, 0));
+        setPreferredSize(new java.awt.Dimension(1221, 831));
+        setLayout(null);
 
         jPanel23.setBackground(new java.awt.Color(44, 62, 80));
         jPanel23.setPreferredSize(new java.awt.Dimension(233, 55));
@@ -74,7 +75,7 @@ public class Usuario extends javax.swing.JPanel {
             .addGroup(jPanel23Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(lbTitulo4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(1019, Short.MAX_VALUE))
         );
         jPanel23Layout.setVerticalGroup(
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -83,6 +84,9 @@ public class Usuario extends javax.swing.JPanel {
                 .addComponent(lbTitulo4)
                 .addContainerGap(16, Short.MAX_VALUE))
         );
+
+        add(jPanel23);
+        jPanel23.setBounds(0, 15, 1246, 55);
 
         tbUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -93,6 +97,9 @@ public class Usuario extends javax.swing.JPanel {
             }
         ));
         jScrollPane1.setViewportView(tbUsuarios);
+
+        add(jScrollPane1);
+        jScrollPane1.setBounds(31, 102, 689, 620);
 
         pnUsuario.setBackground(new java.awt.Color(178, 190, 195));
 
@@ -178,7 +185,7 @@ public class Usuario extends javax.swing.JPanel {
         pnUsuario.setLayout(pnUsuarioLayout);
         pnUsuarioLayout.setHorizontalGroup(
             pnUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
+            .addComponent(pnTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
             .addGroup(pnUsuarioLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(pnUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -202,7 +209,7 @@ public class Usuario extends javax.swing.JPanel {
                     .addComponent(txtContraseña))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnUsuarioLayout.createSequentialGroup()
-                .addContainerGap(86, Short.MAX_VALUE)
+                .addContainerGap(63, Short.MAX_VALUE)
                 .addComponent(btnUpdate)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAceptar)
@@ -244,8 +251,11 @@ public class Usuario extends javax.swing.JPanel {
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar)
                     .addComponent(btnUpdate))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
+
+        add(pnUsuario);
+        pnUsuario.setBounds(772, 382, 400, 410);
 
         btnAgregar.setBackground(new java.awt.Color(44, 62, 80));
         btnAgregar.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
@@ -259,6 +269,8 @@ public class Usuario extends javax.swing.JPanel {
                 btnAgregarActionPerformed(evt);
             }
         });
+        add(btnAgregar);
+        btnAgregar.setBounds(772, 102, 423, 58);
 
         btnEliminar.setBackground(new java.awt.Color(44, 62, 80));
         btnEliminar.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
@@ -272,6 +284,8 @@ public class Usuario extends javax.swing.JPanel {
                 btnEliminarActionPerformed(evt);
             }
         });
+        add(btnEliminar);
+        btnEliminar.setBounds(772, 166, 423, 64);
 
         btnActualizar.setBackground(new java.awt.Color(44, 62, 80));
         btnActualizar.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
@@ -285,6 +299,8 @@ public class Usuario extends javax.swing.JPanel {
                 btnActualizarActionPerformed(evt);
             }
         });
+        add(btnActualizar);
+        btnActualizar.setBounds(772, 236, 423, 64);
 
         btnCargarDatos.setBackground(new java.awt.Color(44, 62, 80));
         btnCargarDatos.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
@@ -298,44 +314,8 @@ public class Usuario extends javax.swing.JPanel {
                 btnCargarDatosActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, 1239, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCargarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnActualizar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(44, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEliminar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnActualizar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCargarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
-        );
+        add(btnCargarDatos);
+        btnCargarDatos.setBounds(775, 306, 420, 64);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseñaActionPerformed

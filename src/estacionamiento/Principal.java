@@ -36,6 +36,7 @@ public class Principal extends javax.swing.JFrame {
         btnInicio = new javax.swing.JButton();
         btnPrecios = new javax.swing.JButton();
         lbBienvenida = new javax.swing.JLabel();
+        btnReportes = new javax.swing.JButton();
         pnInicio = new javax.swing.JPanel();
         btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -80,6 +81,7 @@ public class Principal extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(44, 62, 80));
         jButton1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cerrar-sesion.png"))); // NOI18N
         jButton1.setText("CERRAR SESIÓN");
         jButton1.setBorder(null);
         jButton1.setContentAreaFilled(false);
@@ -131,47 +133,58 @@ public class Principal extends javax.swing.JFrame {
         lbBienvenida.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
         lbBienvenida.setForeground(new java.awt.Color(255, 255, 255));
 
+        btnReportes.setBackground(new java.awt.Color(44, 62, 80));
+        btnReportes.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        btnReportes.setForeground(new java.awt.Color(255, 255, 255));
+        btnReportes.setText("REPORTES");
+        btnReportes.setBorder(null);
+        btnReportes.setContentAreaFilled(false);
+        btnReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnBarraLayout = new javax.swing.GroupLayout(pnBarra);
         pnBarra.setLayout(pnBarraLayout);
         pnBarraLayout.setHorizontalGroup(
             pnBarraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnBarraLayout.createSequentialGroup()
-                .addGroup(pnBarraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnBarraLayout.createSequentialGroup()
-                        .addGap(103, 103, 103)
-                        .addComponent(jButton1))
-                    .addGroup(pnBarraLayout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addGroup(pnBarraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnPrecios)
-                            .addComponent(btnSalida)
-                            .addComponent(btnIngresar)
-                            .addComponent(btnInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnNuevoUsuario))))
-                .addContainerGap(78, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnBarraLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lbBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addComponent(lbBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
+            .addGroup(pnBarraLayout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addGroup(pnBarraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnReportes)
+                    .addComponent(jButton1)
+                    .addComponent(btnPrecios)
+                    .addComponent(btnSalida)
+                    .addComponent(btnIngresar)
+                    .addComponent(btnInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNuevoUsuario))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnBarraLayout.setVerticalGroup(
             pnBarraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnBarraLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(34, 34, 34)
                 .addComponent(lbBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
+                .addGap(35, 35, 35)
                 .addComponent(btnInicio)
-                .addGap(50, 50, 50)
+                .addGap(30, 30, 30)
                 .addComponent(btnIngresar)
-                .addGap(56, 56, 56)
+                .addGap(30, 30, 30)
                 .addComponent(btnSalida)
-                .addGap(60, 60, 60)
+                .addGap(30, 30, 30)
                 .addComponent(btnPrecios)
-                .addGap(63, 63, 63)
+                .addGap(33, 33, 33)
                 .addComponent(btnNuevoUsuario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
+                .addComponent(btnReportes)
+                .addGap(30, 30, 30)
                 .addComponent(jButton1)
-                .addGap(41, 41, 41))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
         getContentPane().add(pnBarra, java.awt.BorderLayout.WEST);
@@ -284,6 +297,10 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReportesActionPerformed
+
     private void isVisiblePanels() {
         this.pnInicio.setVisible(false);
         this.ig.setVisible(false);
@@ -335,6 +352,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnInicio;
     private javax.swing.JButton btnNuevoUsuario;
     private javax.swing.JButton btnPrecios;
+    private javax.swing.JButton btnReportes;
     private javax.swing.JButton btnSalida;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
