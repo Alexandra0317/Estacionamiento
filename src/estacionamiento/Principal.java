@@ -136,6 +136,7 @@ public class Principal extends javax.swing.JFrame {
         btnReportes.setBackground(new java.awt.Color(44, 62, 80));
         btnReportes.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btnReportes.setForeground(new java.awt.Color(255, 255, 255));
+        btnReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/informe-seo(1).png"))); // NOI18N
         btnReportes.setText("REPORTES");
         btnReportes.setBorder(null);
         btnReportes.setContentAreaFilled(false);
@@ -184,7 +185,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(btnReportes)
                 .addGap(30, 30, 30)
                 .addComponent(jButton1)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         getContentPane().add(pnBarra, java.awt.BorderLayout.WEST);
@@ -193,15 +194,19 @@ public class Principal extends javax.swing.JFrame {
         pnInicio.setPreferredSize(new java.awt.Dimension(100, 100));
         pnInicio.setLayout(null);
 
+        btnBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/lupa(1).png"))); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
             }
         });
         pnInicio.add(btnBuscar);
-        btnBuscar.setBounds(1030, 100, 72, 23);
+        btnBuscar.setBounds(990, 140, 130, 30);
 
+        tbAutomoviles.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tbAutomoviles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -212,18 +217,20 @@ public class Principal extends javax.swing.JFrame {
         ));
         tbAutomoviles.setToolTipText("");
         tbAutomoviles.setPreferredSize(new java.awt.Dimension(500, 150));
+        tbAutomoviles.setRowHeight(35);
         jScrollPane1.setViewportView(tbAutomoviles);
 
         pnInicio.add(jScrollPane1);
-        jScrollPane1.setBounds(40, 140, 1070, 610);
+        jScrollPane1.setBounds(60, 200, 1060, 550);
         pnInicio.add(txtBuscar);
-        txtBuscar.setBounds(710, 100, 299, 22);
+        txtBuscar.setBounds(510, 140, 460, 30);
+        txtBuscar.getAccessibleContext().setAccessibleName("");
 
         pnTitulo.setBackground(new java.awt.Color(44, 62, 80));
         pnTitulo.setPreferredSize(new java.awt.Dimension(368, 55));
 
         lbTitulo3.setBackground(new java.awt.Color(255, 255, 255));
-        lbTitulo3.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 36)); // NOI18N
+        lbTitulo3.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 48)); // NOI18N
         lbTitulo3.setForeground(new java.awt.Color(255, 255, 255));
         lbTitulo3.setText("ESTACIONAMIENTO");
 
@@ -232,20 +239,20 @@ public class Principal extends javax.swing.JFrame {
         pnTituloLayout.setHorizontalGroup(
             pnTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnTituloLayout.createSequentialGroup()
-                .addContainerGap(727, Short.MAX_VALUE)
-                .addComponent(lbTitulo3, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(131, 131, 131))
+                .addContainerGap(653, Short.MAX_VALUE)
+                .addComponent(lbTitulo3, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77))
         );
         pnTituloLayout.setVerticalGroup(
             pnTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnTituloLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnTituloLayout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
                 .addComponent(lbTitulo3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
         );
 
         pnInicio.add(pnTitulo);
-        pnTitulo.setBounds(0, 20, 1230, 55);
+        pnTitulo.setBounds(0, 20, 1230, 90);
 
         getContentPane().add(pnInicio, java.awt.BorderLayout.CENTER);
 

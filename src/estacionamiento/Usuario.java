@@ -64,7 +64,7 @@ public class Usuario extends javax.swing.JPanel {
         jPanel23.setPreferredSize(new java.awt.Dimension(233, 55));
 
         lbTitulo4.setBackground(new java.awt.Color(255, 255, 255));
-        lbTitulo4.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
+        lbTitulo4.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 48)); // NOI18N
         lbTitulo4.setForeground(new java.awt.Color(255, 255, 255));
         lbTitulo4.setText("TABLA DE USUARIO");
 
@@ -74,19 +74,19 @@ public class Usuario extends javax.swing.JPanel {
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel23Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addComponent(lbTitulo4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1019, Short.MAX_VALUE))
+                .addComponent(lbTitulo4, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(554, Short.MAX_VALUE))
         );
         jPanel23Layout.setVerticalGroup(
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel23Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(lbTitulo4)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         add(jPanel23);
-        jPanel23.setBounds(0, 15, 1246, 55);
+        jPanel23.setBounds(0, 20, 1230, 90);
 
         tbUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -96,10 +96,11 @@ public class Usuario extends javax.swing.JPanel {
                 "id", "Nombre (s)", "Apellido (s)", "Telefono", "Correo", "Contraseña", "Rol"
             }
         ));
+        tbUsuarios.setRowHeight(35);
         jScrollPane1.setViewportView(tbUsuarios);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(31, 102, 689, 620);
+        jScrollPane1.setBounds(20, 150, 689, 560);
 
         pnUsuario.setBackground(new java.awt.Color(178, 190, 195));
 
@@ -165,6 +166,8 @@ public class Usuario extends javax.swing.JPanel {
             }
         });
 
+        btnAceptar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/guardar-el-archivo.png"))); // NOI18N
         btnAceptar.setText("GUARDAR");
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,8 +175,12 @@ public class Usuario extends javax.swing.JPanel {
             }
         });
 
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/boton-x.png"))); // NOI18N
         btnCancelar.setText("CANCELAR");
 
+        btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar.png"))); // NOI18N
         btnUpdate.setText("ACTUALIZAR");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,7 +192,7 @@ public class Usuario extends javax.swing.JPanel {
         pnUsuario.setLayout(pnUsuarioLayout);
         pnUsuarioLayout.setHorizontalGroup(
             pnUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(pnTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
             .addGroup(pnUsuarioLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(pnUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -209,7 +216,7 @@ public class Usuario extends javax.swing.JPanel {
                     .addComponent(txtContraseña))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnUsuarioLayout.createSequentialGroup()
-                .addContainerGap(63, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnUpdate)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAceptar)
@@ -248,18 +255,18 @@ public class Usuario extends javax.swing.JPanel {
                     .addComponent(cboxRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAceptar)
-                    .addComponent(btnCancelar)
+                    .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUpdate))
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         add(pnUsuario);
-        pnUsuario.setBounds(772, 382, 400, 410);
+        pnUsuario.setBounds(730, 400, 400, 370);
 
         btnAgregar.setBackground(new java.awt.Color(44, 62, 80));
         btnAgregar.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/etiqueta(1).png"))); // NOI18N
+        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/usuario.png"))); // NOI18N
         btnAgregar.setText("AGREGAR");
         btnAgregar.setBorder(null);
         btnAgregar.setContentAreaFilled(false);
@@ -270,11 +277,11 @@ public class Usuario extends javax.swing.JPanel {
             }
         });
         add(btnAgregar);
-        btnAgregar.setBounds(772, 102, 423, 58);
+        btnAgregar.setBounds(770, 120, 423, 70);
 
         btnEliminar.setBackground(new java.awt.Color(44, 62, 80));
         btnEliminar.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/etiqueta.png"))); // NOI18N
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/basura.png"))); // NOI18N
         btnEliminar.setText("ELIMINAR");
         btnEliminar.setBorder(null);
         btnEliminar.setContentAreaFilled(false);
@@ -285,11 +292,11 @@ public class Usuario extends javax.swing.JPanel {
             }
         });
         add(btnEliminar);
-        btnEliminar.setBounds(772, 166, 423, 64);
+        btnEliminar.setBounds(770, 190, 423, 64);
 
         btnActualizar.setBackground(new java.awt.Color(44, 62, 80));
         btnActualizar.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/recuperacion.png"))); // NOI18N
+        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/usuario(1).png"))); // NOI18N
         btnActualizar.setText("ACTUALIZAR");
         btnActualizar.setBorder(null);
         btnActualizar.setContentAreaFilled(false);
@@ -300,11 +307,11 @@ public class Usuario extends javax.swing.JPanel {
             }
         });
         add(btnActualizar);
-        btnActualizar.setBounds(772, 236, 423, 64);
+        btnActualizar.setBounds(770, 260, 423, 64);
 
         btnCargarDatos.setBackground(new java.awt.Color(44, 62, 80));
         btnCargarDatos.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-        btnCargarDatos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/carga-en-la-nube.png"))); // NOI18N
+        btnCargarDatos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cargando.png"))); // NOI18N
         btnCargarDatos.setText("CARGAR");
         btnCargarDatos.setBorder(null);
         btnCargarDatos.setContentAreaFilled(false);
@@ -315,7 +322,7 @@ public class Usuario extends javax.swing.JPanel {
             }
         });
         add(btnCargarDatos);
-        btnCargarDatos.setBounds(775, 306, 420, 64);
+        btnCargarDatos.setBounds(770, 330, 420, 64);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseñaActionPerformed
