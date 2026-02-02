@@ -10,8 +10,13 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -23,13 +28,20 @@ public class Precios_Establecidos extends javax.swing.JPanel {
     public Connection con = null;
     boolean siSelect = false;
     Precios  preSeleccionado = null;
+    private TableRowSorter<DefaultTableModel> sorter;
     /**
      * Creates new form Precios_Establecidos
      */
     public Precios_Establecidos() {
         initComponents();
-        modelo = (DefaultTableModel)tbPrecios.getModel();
         con = new estacionamiento.ConectarBD().Conexion();
+        modelo = (DefaultTableModel)tbPrecios.getModel();
+        sorter = new TableRowSorter<>(modelo);
+        tbPrecios.setRowSorter(sorter);
+        obtenerDatos();
+        mostrarDatos();
+        buscador();
+        
     }
 
     /**
@@ -105,8 +117,13 @@ public class Precios_Establecidos extends javax.swing.JPanel {
 
         pnPrecio.setBackground(new java.awt.Color(178, 190, 195));
 
-        cboxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TIPO A ", "TIPO B", "TIPO C", "TIPO D ", "TIPO E", "TIPO F" }));
+        cboxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE UNO", "TIPO A", "TIPO B", "TIPO C", "TIPO D", "TIPO E", "TIPO F" }));
         cboxTipo.setEnabled(false);
+        cboxTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboxTipoActionPerformed(evt);
+            }
+        });
 
         lbTipo.setFont(new java.awt.Font("Segoe UI Semibold", 1, 12)); // NOI18N
         lbTipo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -153,6 +170,11 @@ public class Precios_Establecidos extends javax.swing.JPanel {
         btnCancelar1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 12)); // NOI18N
         btnCancelar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/boton-x.png"))); // NOI18N
         btnCancelar1.setText("Cancelar");
+        btnCancelar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelar1ActionPerformed(evt);
+            }
+        });
 
         lbDescripcion.setFont(new java.awt.Font("Segoe UI Semibold", 1, 12)); // NOI18N
         lbDescripcion.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -208,7 +230,7 @@ public class Precios_Establecidos extends javax.swing.JPanel {
 
         btnLimpiar.setBackground(new java.awt.Color(44, 62, 80));
         btnLimpiar.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/borrar.png"))); // NOI18N
+        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/limpieza-de-datos.png"))); // NOI18N
         btnLimpiar.setText("LIMPIAR");
         btnLimpiar.setBorder(null);
         btnLimpiar.setContentAreaFilled(false);
@@ -222,7 +244,7 @@ public class Precios_Establecidos extends javax.swing.JPanel {
 
         btnActualizar.setBackground(new java.awt.Color(44, 62, 80));
         btnActualizar.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/recuperacion.png"))); // NOI18N
+        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/dinero.png"))); // NOI18N
         btnActualizar.setText("ACTUALIZAR");
         btnActualizar.setBorder(null);
         btnActualizar.setContentAreaFilled(false);
@@ -236,7 +258,7 @@ public class Precios_Establecidos extends javax.swing.JPanel {
 
         btnCargar.setBackground(new java.awt.Color(44, 62, 80));
         btnCargar.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-        btnCargar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/carga-en-la-nube.png"))); // NOI18N
+        btnCargar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar(1).png"))); // NOI18N
         btnCargar.setText("CARGAR");
         btnCargar.setBorder(null);
         btnCargar.setContentAreaFilled(false);
@@ -252,6 +274,11 @@ public class Precios_Establecidos extends javax.swing.JPanel {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/lupa(1).png"))); // NOI18N
         jButton1.setText("Buscar");
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -268,43 +295,38 @@ public class Precios_Establecidos extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 669, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(152, 152, 152))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(pnPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(pnTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnLimpiar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnActualizar)
-                        .addGap(32, 32, 32)
-                        .addComponent(pnPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(56, 56, 56))))
+                        .addGap(56, 56, 56))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(btnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLimpiar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnActualizar)
+                        .addGap(56, 56, 56)
+                        .addComponent(pnPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(130, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -326,6 +348,27 @@ public class Precios_Establecidos extends javax.swing.JPanel {
         actualizarP();
     }//GEN-LAST:event_btnActuaPrecioActionPerformed
 
+    private void cboxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboxTipoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        aplicarFiltroBusqueda();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar1ActionPerformed
+        limpiar();
+    }//GEN-LAST:event_btnCancelar1ActionPerformed
+
+    private void txtPrecioKeyReleased(java.awt.event.KeyEvent evt) {                                      
+        String texto = txtPrecio.getText().trim();
+        
+        if(texto.length() == 0){
+            sorter.setRowFilter(null);
+        } else {
+            sorter.setRowFilter(RowFilter.regexFilter("(?i)" + Pattern.quote(texto)));
+        }
+    }    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActuaPrecio;
@@ -369,6 +412,7 @@ public class Precios_Establecidos extends javax.swing.JPanel {
     
     public void obtenerDatos(){
       try{
+          listaPrecios.clear();
           String sql = "SELECT*FROM precios ORDER BY id_precio";
           Statement st = con.createStatement();
           ResultSet rs = st.executeQuery(sql);
@@ -384,11 +428,12 @@ public class Precios_Establecidos extends javax.swing.JPanel {
     
     public void mostrarDatos(){
       try{
+          modelo.setRowCount(0);
             for(Precios p : listaPrecios){
                 Object [] fila = {p.getId_precio(), p.getTipo(), p.getCosto_horas(), p.getDescripcion()};
                 modelo.addRow(fila);
             }
-            tbPrecios.setModel(modelo);
+//            tbPrecios.setModel(modelo);
         }catch(Exception ex){
             System.out.println("Error"+ex.getMessage());
         }
@@ -440,6 +485,36 @@ public class Precios_Establecidos extends javax.swing.JPanel {
         }catch(Exception ex){
             System.out.println(ex.getMessage());
         }
+    }
+    
+    private void buscador(){
+        sorter = new TableRowSorter<>(modelo);
+        tbPrecios.setRowSorter(sorter);
+        txtPrecio.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                aplicarFiltroBusqueda();
+            }
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                aplicarFiltroBusqueda();
+            }
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                aplicarFiltroBusqueda();
+            }
+        });
+    }
+    
+    private void aplicarFiltroBusqueda() {
+        String texto = txtPrecio.getText().trim();
+        if (sorter == null) return;
+        if (texto.isEmpty()) {
+            sorter.setRowFilter(null);
+            return;
+        }
+        String busqueda = "(?i)" + java.util.regex.Pattern.quote(texto);
+        sorter.setRowFilter(RowFilter.regexFilter(busqueda));
     }
     
 

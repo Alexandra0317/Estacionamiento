@@ -3,18 +3,39 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package estacionamiento;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.Time;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Alexandra
  */
 public class Ingresar extends javax.swing.JPanel {
-
-    /**
-     * Creates new form Ingresar
-     */
+    private Connection con = null;
+    private List<Precios> ListaPrecio = new ArrayList<>();
+    private Principal principal;
+    
+    public void setPrincipal(Principal p){
+        this.principal = p;
+    }
     public Ingresar() {
         initComponents();
+        con = ConectarBD.Conexion();
+        cargarTiposVehiculo();
+        establecerHoraEntrada();
+    }
+    
+    private void establecerHoraEntrada() {
+        txtH_Llegada.setText(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
+        txtH_Llegada.setEditable(false);
     }
 
     /**
@@ -63,11 +84,16 @@ public class Ingresar extends javax.swing.JPanel {
         lbMarca.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbMarca.setText("Marca");
 
-        cboxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Uno" }));
 
         btnGuardar1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
         btnGuardar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/guardar-el-archivo.png"))); // NOI18N
         btnGuardar1.setText("Guardar ");
+        btnGuardar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardar1ActionPerformed(evt);
+            }
+        });
 
         txtColor.setMinimumSize(new java.awt.Dimension(64, 37));
 
@@ -212,6 +238,11 @@ public class Ingresar extends javax.swing.JPanel {
         getAccessibleContext().setAccessibleDescription("");
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar1ActionPerformed
+        insertarRegistro();
+        limpiar();
+    }//GEN-LAST:event_btnGuardar1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar1;
@@ -233,4 +264,86 @@ public class Ingresar extends javax.swing.JPanel {
     private javax.swing.JTextField txtPlacas;
     private javax.swing.JTextField txtPropietario;
     // End of variables declaration//GEN-END:variables
+
+    
+    private void cargarTiposVehiculo(){
+        if(con == null){
+            return;
+        }
+        try {
+            cboxTipo.removeAllItems();
+            ListaPrecio.clear();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM precios ORDER BY id_precio");
+            while (rs.next()){
+                Precios pr = new Precios();
+                pr.setId_precio(rs.getInt("id_precio"));
+                pr.setTipo(rs.getString("tipo"));
+                pr.setCosto_horas(rs.getString("costo_horas"));
+                pr.setDescripcion(rs.getString("descripcion"));
+                ListaPrecio.add(pr);
+                cboxTipo.addItem(rs.getString("tipo"));
+            }
+            rs.close();
+            st.close();  
+        }catch (Exception e){
+            System.out.println("Error al cargar tipos: " + e.getMessage());
+        }
+    }
+    
+    public int getIdPrecioSeleccionado() {
+        Object sel = cboxTipo.getSelectedItem();
+        if (sel == null) {
+            return 0;
+        }
+
+        String tipoSeleccionado = sel.toString();
+
+        for (Precios p : ListaPrecio) {
+            if (tipoSeleccionado.equals(p.getTipo())) {
+                return p.getId_precio();
+            }
+        }
+        return 0;
+    }
+
+    public void insertarRegistro(){
+    try{
+        Time horaEntrada = Time.valueOf(LocalTime.parse(txtH_Llegada.getText().trim(), DateTimeFormatter.ofPattern("HH:mm")));
+        Automoviles au = new Automoviles(txtPropietario.getText(), txtPlacas.getText(), txtMarca.getText(), txtColor.getText(), getIdPrecioSeleccionado(), horaEntrada, txtDescripcion.getText(), true);
+        String sql ="INSERT INTO automoviles(propietario, placas, marca, color, hora_llegada, descripcion, activo, id_precio) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement pstmt = con.prepareStatement(sql);
+        pstmt.setString(1, au.getPropietario());
+        pstmt.setString(2, au.getPlacas());
+        pstmt.setString(3, au.getMarca());
+        pstmt.setString(4, au.getColor());
+        pstmt.setTime(5, au.getHora_llegada());
+        pstmt.setString(6, au.getDescripcion());
+        pstmt.setBoolean(7, au.isActivo());
+        pstmt.setInt(8, au.getId_precio());
+        pstmt.executeUpdate();
+        JOptionPane.showMessageDialog(this, "Registrado Correctamente");
+        if(principal != null){
+            principal.volverAInicio();
+        }
+//        con.close();
+    }catch(Exception ex){
+        System.out.println(ex.getMessage());
+    }
 }
+    
+    public void limpiar(){
+        txtPropietario.setText("");
+        txtPlacas.setText("");
+        txtMarca.setText("");
+        txtColor.setText("");
+        txtH_Llegada.setText("");
+        txtDescripcion.setText("");
+        cboxTipo.setSelectedIndex(0);     
+    }
+
+
+
+}
+
+

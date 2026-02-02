@@ -38,22 +38,14 @@
                       <Component id="jScrollPane1" min="-2" pref="669" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace pref="33" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnLimpiar" min="-2" pref="335" max="-2" attributes="0"/>
-                          <Component id="btnCargar" min="-2" pref="335" max="-2" attributes="0"/>
-                          <Component id="btnActualizar" alignment="0" min="-2" pref="335" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                      <Component id="pnPrecio" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="btnLimpiar" min="-2" pref="335" max="-2" attributes="0"/>
+                  <Component id="btnCargar" min="-2" pref="335" max="-2" attributes="0"/>
+                  <Component id="btnActualizar" alignment="0" min="-2" pref="335" max="-2" attributes="0"/>
+                  <Component id="pnPrecio" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace pref="56" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -62,27 +54,27 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               <Component id="pnTitulo" min="-2" pref="90" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="btnCargar" min="-2" pref="64" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnLimpiar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnActualizar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="pnPrecio" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="19" pref="19" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtPrecio" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="jButton1" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="560" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="btnCargar" min="-2" pref="64" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnLimpiar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnActualizar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                      <Component id="pnPrecio" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="130" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -237,17 +229,21 @@
         <Component class="javax.swing.JComboBox" name="cboxTipo">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="6">
-                <StringItem index="0" value="TIPO A "/>
-                <StringItem index="1" value="TIPO B"/>
-                <StringItem index="2" value="TIPO C"/>
-                <StringItem index="3" value="TIPO D "/>
-                <StringItem index="4" value="TIPO E"/>
-                <StringItem index="5" value="TIPO F"/>
+              <StringArray count="7">
+                <StringItem index="0" value="SELECCIONE UNO"/>
+                <StringItem index="1" value="TIPO A"/>
+                <StringItem index="2" value="TIPO B"/>
+                <StringItem index="3" value="TIPO C"/>
+                <StringItem index="4" value="TIPO D"/>
+                <StringItem index="5" value="TIPO E"/>
+                <StringItem index="6" value="TIPO F"/>
               </StringArray>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboxTipoActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
@@ -343,6 +339,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelar1ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbDescripcion">
           <Properties>
@@ -366,7 +365,7 @@
           <Font name="Liberation Sans" size="18" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Imagenes/borrar.png"/>
+          <Image iconType="3" name="/Imagenes/limpieza-de-datos.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="LIMPIAR"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -389,7 +388,7 @@
           <Font name="Liberation Sans" size="18" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Imagenes/recuperacion.png"/>
+          <Image iconType="3" name="/Imagenes/dinero.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="ACTUALIZAR"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -412,7 +411,7 @@
           <Font name="Liberation Sans" size="18" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Imagenes/carga-en-la-nube.png"/>
+          <Image iconType="3" name="/Imagenes/actualizar(1).png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="CARGAR"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -439,6 +438,9 @@
         <Property name="text" type="java.lang.String" value="Buscar"/>
         <Property name="horizontalTextPosition" type="int" value="2"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

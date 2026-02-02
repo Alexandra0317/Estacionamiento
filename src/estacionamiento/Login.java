@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static estacionamiento.Principal.lbBienvenida;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -21,6 +22,7 @@ public class Login extends javax.swing.JFrame {
     Salida_Automovil sa = new Salida_Automovil();
     Precios_Establecidos pe = new Precios_Establecidos();
     public Connection con = null;
+    
 
     /**
      * Creates new form Login
@@ -29,6 +31,8 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         con = new estacionamiento.ConectarBD().Conexion();
+        this.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/coche.png")).getImage());
+        
     }
 
     /**
@@ -44,12 +48,13 @@ public class Login extends javax.swing.JFrame {
         lbImagen = new javax.swing.JLabel();
         lbTitulo = new javax.swing.JLabel();
         Login = new javax.swing.JPanel();
-        txtContraseña = new javax.swing.JTextField();
         txtUsuario = new javax.swing.JTextField();
         btnIngresar = new javax.swing.JButton();
         lbUsuario = new javax.swing.JLabel();
         lbContraseña = new javax.swing.JLabel();
         lbLogo = new javax.swing.JLabel();
+        btnVerPass = new javax.swing.JButton();
+        passFielContraseña = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,12 +70,6 @@ public class Login extends javax.swing.JFrame {
 
         Login.setBackground(new java.awt.Color(178, 190, 195));
         Login.setPreferredSize(new java.awt.Dimension(623, 427));
-
-        txtContraseña.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtContraseñaActionPerformed(evt);
-            }
-        });
 
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +92,18 @@ public class Login extends javax.swing.JFrame {
 
         lbLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/contacto.png"))); // NOI18N
 
+        btnVerPass.setBackground(new java.awt.Color(178, 190, 195));
+        btnVerPass.setForeground(new java.awt.Color(178, 190, 195));
+        btnVerPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/foto.png"))); // NOI18N
+        btnVerPass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnVerPassMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnVerPassMouseReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout LoginLayout = new javax.swing.GroupLayout(Login);
         Login.setLayout(LoginLayout);
         LoginLayout.setHorizontalGroup(
@@ -101,20 +112,22 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap(35, Short.MAX_VALUE)
                 .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginLayout.createSequentialGroup()
+                        .addComponent(lbLogo)
+                        .addGap(100, 100, 100))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginLayout.createSequentialGroup()
                         .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbContraseña)
                             .addComponent(lbUsuario))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(42, 42, 42))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginLayout.createSequentialGroup()
-                        .addComponent(lbLogo)
-                        .addGap(100, 100, 100))
+                        .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                            .addComponent(passFielContraseña))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnVerPass)
+                        .addGap(14, 14, 14))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginLayout.createSequentialGroup()
                         .addComponent(btnIngresar)
-                        .addGap(88, 88, 88))))
+                        .addGap(85, 85, 85))))
         );
         LoginLayout.setVerticalGroup(
             LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,11 +138,12 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbUsuario))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(15, 15, 15)
                 .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbContraseña))
-                .addGap(29, 29, 29)
+                    .addComponent(lbContraseña)
+                    .addComponent(passFielContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVerPass))
+                .addGap(28, 28, 28)
                 .addComponent(btnIngresar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -181,7 +195,8 @@ public class Login extends javax.swing.JFrame {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         String Usuario = txtUsuario.getText();
-        String Contraseña = txtContraseña.getText();
+        char[] passwordChars = passFielContraseña.getPassword();
+        String Contraseña = new String(passwordChars);
 
         try {
             String u = "SELECT * FROM Usuarios WHERE correo = ? AND contrasena = ?";
@@ -212,10 +227,15 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnIngresarActionPerformed
 
-    private void txtContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseñaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtContraseñaActionPerformed
+    private void btnVerPassMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVerPassMousePressed
+        passFielContraseña.setEchoChar((char) 0);
+    }//GEN-LAST:event_btnVerPassMousePressed
 
+    private void btnVerPassMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVerPassMouseReleased
+        passFielContraseña.setEchoChar('\u2022');
+    }//GEN-LAST:event_btnVerPassMouseReleased
+
+  
     /**
      * @param args the command line arguments
      */
@@ -243,6 +263,7 @@ public class Login extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        estacionamiento.InicializarBD.crearTablas();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -254,13 +275,14 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Login;
     private javax.swing.JButton btnIngresar;
+    private javax.swing.JButton btnVerPass;
     private javax.swing.JPanel jPanel;
     private javax.swing.JLabel lbContraseña;
     private javax.swing.JLabel lbImagen;
     private javax.swing.JLabel lbLogo;
     private javax.swing.JLabel lbTitulo;
     private javax.swing.JLabel lbUsuario;
-    private javax.swing.JTextField txtContraseña;
+    private javax.swing.JPasswordField passFielContraseña;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

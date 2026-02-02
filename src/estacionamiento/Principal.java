@@ -4,16 +4,38 @@
  */
 package estacionamiento;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 public class Principal extends javax.swing.JFrame {
 
     Ingresar ig = new Ingresar();
     Salida_Automovil sa = new Salida_Automovil();
     Precios_Establecidos pe = new Precios_Establecidos();
     Usuario ur = new Usuario();
+    Reportes rp = new Reportes();
+    private Connection con = null;
+    DefaultTableModel modeloRegistro = new DefaultTableModel();
+    private List<Automoviles> ListaRegistros = new ArrayList<>();
+    private List<Precios> ListaPrecio = new ArrayList<>();
+    private TableRowSorter<DefaultTableModel> sorter;
 
 
     public Principal(String rol) {
         initComponents();
+        Reloj r = new Reloj();
+        r.start();
         if(rol != "ADMIN"){
             btnPrecios.setEnabled(true);
             btnPrecios.setVisible(false);
@@ -21,7 +43,18 @@ public class Principal extends javax.swing.JFrame {
             btnNuevoUsuario.setVisible(false);
             
         }
+        modeloRegistro = (DefaultTableModel)tbAutomoviles.getModel();
+        sorter = new TableRowSorter<>(modeloRegistro);
+        tbAutomoviles.setRowSorter(sorter);
         this.setExtendedState(this.MAXIMIZED_BOTH);
+        this.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/coche.png")).getImage());
+        con = ConectarBD.Conexion();
+        cargarTiposVehiculo();
+        cargarRegistros();
+        mostrarDatos();
+        buscador();
+        sa.setPrincipal(this);
+        ig.setPrincipal(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -44,6 +77,7 @@ public class Principal extends javax.swing.JFrame {
         txtBuscar = new javax.swing.JTextField();
         pnTitulo = new javax.swing.JPanel();
         lbTitulo3 = new javax.swing.JLabel();
+        lbHora = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(500, 410));
@@ -212,7 +246,7 @@ public class Principal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID_auto", "Propietario", "Placas", "Marca", "Color", "Descripcion", "Hora_llegada"
+                "ID_auto", "Propietario", "Placas", "Marca", "Color", "Tipo", "Descripcion", "Hora_llegada"
             }
         ));
         tbAutomoviles.setToolTipText("");
@@ -222,6 +256,12 @@ public class Principal extends javax.swing.JFrame {
 
         pnInicio.add(jScrollPane1);
         jScrollPane1.setBounds(60, 200, 1060, 550);
+
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
+            }
+        });
         pnInicio.add(txtBuscar);
         txtBuscar.setBounds(510, 140, 460, 30);
         txtBuscar.getAccessibleContext().setAccessibleName("");
@@ -234,20 +274,29 @@ public class Principal extends javax.swing.JFrame {
         lbTitulo3.setForeground(new java.awt.Color(255, 255, 255));
         lbTitulo3.setText("ESTACIONAMIENTO");
 
+        lbHora.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        lbHora.setForeground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout pnTituloLayout = new javax.swing.GroupLayout(pnTitulo);
         pnTitulo.setLayout(pnTituloLayout);
         pnTituloLayout.setHorizontalGroup(
             pnTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnTituloLayout.createSequentialGroup()
-                .addContainerGap(653, Short.MAX_VALUE)
+                .addGap(24, 24, 24)
+                .addComponent(lbHora, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 362, Short.MAX_VALUE)
                 .addComponent(lbTitulo3, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(77, 77, 77))
         );
         pnTituloLayout.setVerticalGroup(
             pnTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnTituloLayout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addComponent(lbTitulo3)
+                .addContainerGap()
+                .addGroup(pnTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbHora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnTituloLayout.createSequentialGroup()
+                        .addGap(0, 12, Short.MAX_VALUE)
+                        .addComponent(lbTitulo3)))
                 .addGap(15, 15, 15))
         );
 
@@ -267,6 +316,14 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalidaActionPerformed
+        int row = tbAutomoviles.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione una fila de la tabla para registrar la salida.", "Sin selección", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        int modelRow = tbAutomoviles.convertRowIndexToModel(row);
+        Automoviles au = ListaRegistros.get(modelRow);
+        sa.cargarDatos(au);
         isVisiblePanels();
         this.add(sa);
         sa.setBounds(0, 79, 637, 319);
@@ -288,6 +345,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
         isVisiblePanels();
+        refrescarDatos();
         this.add(pnInicio);
         pnInicio.setBounds(0, 79, 637, 319);
         pnInicio.setVisible(true);
@@ -301,14 +359,27 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPreciosActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
+        aplicarFiltroBusqueda();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-        // TODO add your handling code here:
+        isVisiblePanels();
+        this.add(rp);
+        rp.setBounds(0, 79, 637, 319);
+        rp.setVisible(true);
     }//GEN-LAST:event_btnReportesActionPerformed
 
-    private void isVisiblePanels() {
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        String texto = txtBuscar.getText().trim();
+        
+        if(texto.length() == 0){
+            sorter.setRowFilter(null);
+        } else {
+            sorter.setRowFilter(RowFilter.regexFilter("(?i)" + Pattern.quote(texto)));
+        }
+    }//GEN-LAST:event_txtBuscarKeyReleased
+
+    public void  isVisiblePanels() {
         this.pnInicio.setVisible(false);
         this.ig.setVisible(false);
         this.sa.setVisible(false);
@@ -316,6 +387,7 @@ public class Principal extends javax.swing.JFrame {
         this.ur.setVisible(false);
         this.ur.pnUsuario.setVisible(false);
         this.pe.pnPrecio.setVisible(false);
+        this.rp.setVisible(false);
     }
 
     /**
@@ -364,11 +436,141 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JLabel lbBienvenida;
+    public static javax.swing.JLabel lbHora;
     private javax.swing.JLabel lbTitulo3;
     private javax.swing.JPanel pnBarra;
-    private javax.swing.JPanel pnInicio;
+    public static javax.swing.JPanel pnInicio;
     private javax.swing.JPanel pnTitulo;
     private javax.swing.JTable tbAutomoviles;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
+
+   private void cargarRegistros() {
+        if (con == null) {
+            return;
+        }
+        try {
+            limpiarTabla();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM automoviles WHERE activo = true ORDER BY id_auto");
+            while (rs.next()) {
+                Automoviles au = new Automoviles();
+                au.setId_auto(rs.getInt("id_auto"));
+                au.setPropietario(rs.getString("propietario"));
+                au.setPlacas(rs.getString("placas"));
+                au.setMarca(rs.getString("marca"));
+                au.setColor(rs.getString("color"));
+                au.setHora_llegada(rs.getTime("hora_llegada"));
+                au.setId_precio(rs.getInt("id_precio"));
+                au.setActivo(rs.getBoolean("activo"));
+                au.setDescripcion(rs.getString("descripcion"));
+                au.setTipo(getIdPrecioGuardado(rs.getInt("id_precio")));
+                ListaRegistros.add(au);
+            }
+            rs.close();
+            st.close();
+        } catch (Exception e) {
+            System.out.println("Error al cargar registros: " + e.getMessage());
+        }
+    }
+   
+   private void cargarTiposVehiculo() {
+        if (con == null) {
+            return;
+        }
+        try {
+            ListaPrecio.clear();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM precios ORDER BY id_precio");
+            while (rs.next()) {
+                Precios pr = new Precios();
+                pr.setId_precio(rs.getInt("id_precio"));
+                pr.setTipo(rs.getString("tipo"));
+                pr.setCosto_horas(rs.getString("costo_horas"));
+                pr.setDescripcion(rs.getString("descripcion"));
+                ListaPrecio.add(pr);
+            }
+            rs.close();
+            st.close();
+        } catch (Exception e) {
+            System.out.println("Error al cargar tipos: " + e.getMessage());
+        }
+    }
+   
+   public String getIdPrecioGuardado(int n) {
+        for (Precios p : ListaPrecio) {
+            if (n == p.getId_precio()) {
+                return p.getTipo();
+            }
+        }
+        return "";
+    }
+
+    public void mostrarDatos() {
+        try {
+            for (Automoviles au : ListaRegistros) {
+                Object[] fila = {au.getId_auto(), au.getPropietario(), au.getPlacas(), au.getMarca(), au.getColor(), au.getTipo(), au.getDescripcion(),au.getHora_llegadaFormato()};
+                modeloRegistro.addRow(fila);
+            }
+            tbAutomoviles.setModel(modeloRegistro);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    public void refrescarDatos() {
+        modeloRegistro.setRowCount(0);
+        cargarRegistros();
+        mostrarDatos();
+    }
+    
+    public void volverAInicio(){
+        isVisiblePanels();
+        refrescarDatos();
+        this.add(pnInicio);
+        pnInicio.setBounds(0, 79, 637, 319);
+        pnInicio.setVisible(true);
+        
+    }
+    
+    public void limpiarTabla(){
+        int a = modeloRegistro.getRowCount();
+        while(a != 0){
+            if(a != 0){
+                modeloRegistro.removeRow(0);
+            a = modeloRegistro.getRowCount();
+            }
+        }
+        ListaRegistros.clear();
+    }
+
+    private void buscador(){
+        sorter = new TableRowSorter<>(modeloRegistro);
+        tbAutomoviles.setRowSorter(sorter);
+        txtBuscar.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                aplicarFiltroBusqueda();
+            }
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                aplicarFiltroBusqueda();
+            }
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                aplicarFiltroBusqueda();
+            }
+        });
+    }
+    
+    private void aplicarFiltroBusqueda() {
+        String texto = txtBuscar.getText().trim();
+        if (sorter == null) return;
+        if (texto.isEmpty()) {
+            sorter.setRowFilter(null);
+            return;
+        }
+        String busqueda = "(?i)" + java.util.regex.Pattern.quote(texto);
+        sorter.setRowFilter(RowFilter.regexFilter(busqueda));
+    }
 }

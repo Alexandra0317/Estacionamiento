@@ -9,6 +9,10 @@ package estacionamiento;
  * @author Alexandra
  */
 public class Precios {
+    
+    public Precios(){
+        
+    }
     public Precios(String tipo, String costo_horas, String descripcion) {
         this.tipo = tipo;
         this.costo_horas = costo_horas;
@@ -19,6 +23,7 @@ public class Precios {
     String tipo;
     String costo_horas;
     String descripcion;
+
 
     public String getDescripcion() {
         return descripcion;

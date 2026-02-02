@@ -178,6 +178,11 @@ public class Usuario extends javax.swing.JPanel {
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/boton-x.png"))); // NOI18N
         btnCancelar.setText("CANCELAR");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar.png"))); // NOI18N
@@ -331,9 +336,12 @@ public class Usuario extends javax.swing.JPanel {
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         leerU();
+        txtCorreo.enable(false);
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        limpiar();
+        txtCorreo.enable(true);
         pnUsuario.setVisible(true);
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -347,7 +355,6 @@ public class Usuario extends javax.swing.JPanel {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         insertarU();
-        limpiar();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnCargarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarDatosActionPerformed
@@ -359,6 +366,10 @@ public class Usuario extends javax.swing.JPanel {
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         actualizarU();
     }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        limpiar();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
@@ -389,24 +400,29 @@ public class Usuario extends javax.swing.JPanel {
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 
-public void insertarU(){
-    try{
-        Usuarios us = new Usuarios(txtNombre.getText(), txtApellidos.getText(), txtTelefono.getText(), txtCorreo.getText(), txtContraseña.getText(), (cboxRol.getSelectedItem()).toString());
-        String sql ="INSERT INTO usuarios(nombre, apellidos, telefono, correo, usuario, contrasena, rol) VALUES (?, ?, ?, ?, ?, ?)";
-        PreparedStatement pstmt = con.prepareStatement(sql);
-        pstmt.setString(1, us.getNombre());
-        pstmt.setString(2, us.getApellidos());
-        pstmt.setString(3, us.getTelefono());
-        pstmt.setString(4, us.getCorreo());
-        pstmt.setString(5, us.getContraseña());
-        pstmt.setString(6, us.getRol());
-        pstmt.executeUpdate();
-        JOptionPane.showMessageDialog(this, "Usuario Insertado Correctamente");
+    public void insertarU() {
+        if (txtNombre.getText().equals("") || txtApellidos.getText().equals("") || txtTelefono.getText().equals(" ") || txtCorreo.getText().equals("") || txtContraseña.getText().equals("") || (cboxRol.getSelectedItem()).toString().equals("")) {
+            JOptionPane.showInternalMessageDialog(null, "Rellene todos los campos", "Aviso", JOptionPane.WARNING_MESSAGE);
+        } else {
+            try {
+                Usuarios us = new Usuarios(txtNombre.getText(), txtApellidos.getText(), txtTelefono.getText(), txtCorreo.getText(), txtContraseña.getText(), (cboxRol.getSelectedItem()).toString());
+                String sql = "INSERT INTO usuarios(nombre, apellidos, telefono, correo, contrasena, rol) VALUES (?, ?, ?, ?, ?, ?)";
+                PreparedStatement pstmt = con.prepareStatement(sql);
+                pstmt.setString(1, us.getNombre());
+                pstmt.setString(2, us.getApellidos());
+                pstmt.setString(3, us.getTelefono());
+                pstmt.setString(4, us.getCorreo());
+                pstmt.setString(5, us.getContraseña());
+                pstmt.setString(6, us.getRol());
+                pstmt.executeUpdate();
+                JOptionPane.showMessageDialog(this, "Usuario Insertado Correctamente");
+                limpiar();
 //        con.close();
-    }catch(Exception ex){
-        System.out.println(ex.getMessage());
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }
-}
 
   public void limpiarTabla() {
         int a=modelo.getRowCount();    
@@ -463,32 +479,36 @@ public void insertarU(){
      }
         
         
-    public void eliminarU(){
-        seleccionar();
-        if(siSelect){
-            int fila = tbUsuarios.getSelectedRow();
-            int id = Integer.parseInt(tbUsuarios.getValueAt(fila,0).toString());
-            int confirmar = JOptionPane.showConfirmDialog(this,"¿Está seguro de que desea eliminar este Operador?","Confirmar eliminación",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
-            if (confirmar != JOptionPane.YES_OPTION) {
-                return; 
-            }
-        try {
-            String sql = "DELETE FROM usuarios WHERE id_usuario = ?";
-            PreparedStatement pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, id);
-            int filas = pstmt.executeUpdate();
+    public void eliminarU() {
+        if (txtCorreo.getText().equals("admin@gmail.com")) {
+            JOptionPane.showInternalMessageDialog(null, "No se Puede Eliminar ADMINISTRADOR", "Aviso", JOptionPane.WARNING_MESSAGE);
+        } else {
+            seleccionar();
+            if (siSelect) {
+                int fila = tbUsuarios.getSelectedRow();
+                int id = Integer.parseInt(tbUsuarios.getValueAt(fila, 0).toString());
+                int confirmar = JOptionPane.showConfirmDialog(this, "¿Está seguro de que desea eliminar este Operador?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (confirmar != JOptionPane.YES_OPTION) {
+                    return;
+                }
+                try {
+                    String sql = "DELETE FROM usuarios WHERE id_usuario = ?";
+                    PreparedStatement pstmt = con.prepareStatement(sql);
+                    pstmt.setInt(1, id);
+                    int filas = pstmt.executeUpdate();
 //            con.close();
-            if (filas > 0){
-                JOptionPane.showMessageDialog(this, "Operador eliminado correctamente", "Exito",JOptionPane.INFORMATION_MESSAGE);
-                limpiarTabla();
-                obtenerDatos();
-                mostrarDatos();
-            }else{
-                JOptionPane.showMessageDialog(this, "No se pudo eliminar", "Erro", JOptionPane.ERROR_MESSAGE);
+                    if (filas > 0) {
+                        JOptionPane.showMessageDialog(this, "Operador eliminado correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                        limpiarTabla();
+                        obtenerDatos();
+                        mostrarDatos();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "No se pudo eliminar", "Erro", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(this, "Error al eliminar: " + ex.getMessage(), "Error SQL", JOptionPane.ERROR_MESSAGE);
+                }
             }
-        }catch (SQLException ex){
-            JOptionPane.showMessageDialog(this, "Error al eliminar: " + ex.getMessage(), "Error SQL", JOptionPane.ERROR_MESSAGE);
-        }
         }
     }
     
@@ -513,30 +533,35 @@ public void insertarU(){
     }
     
     public void actualizarU(){
-        try{
-        Usuarios us = new Usuarios(txtNombre.getText(), txtApellidos.getText(), txtTelefono.getText(), txtCorreo.getText(), txtContraseña.getText(), (cboxRol.getSelectedItem()).toString());
-        String sql ="UPDATE usuarios SET nombre=?, apellidos=?, telefono=?, usuario=?, contrasena=?, rol=? WHERE correo=?";
-        PreparedStatement pstmt = con.prepareStatement(sql);
-        pstmt.setString(1, us.getNombre());
-        pstmt.setString(2, us.getApellidos());
-        pstmt.setString(3, us.getTelefono());
-        pstmt.setString(4, us.getContraseña());
-        pstmt.setString(5, us.getRol());
-        pstmt.setString(6, us.getCorreo());
-        int filas = pstmt.executeUpdate();
-        if (filas > 0){
-                JOptionPane.showMessageDialog(this, "Se ah Actualizado correctamente", "Exito",JOptionPane.INFORMATION_MESSAGE);
-                limpiarTabla();
-                obtenerDatos();
-                mostrarDatos();
-                limpiar();
-            }else{
-                JOptionPane.showMessageDialog(this, "No se pudo Actualizar", "Erro", JOptionPane.ERROR_MESSAGE);
-            }
+        if (txtCorreo.getText().equals("admin@gmail.com")){
+            JOptionPane.showInternalMessageDialog(null, "No se Puede Actualizar ADMINISTRADOR", "Aviso", JOptionPane.WARNING_MESSAGE);
+        } else {
+            try {
+                Usuarios us = new Usuarios(txtNombre.getText(), txtApellidos.getText(), txtTelefono.getText(), txtCorreo.getText(), txtContraseña.getText(), (cboxRol.getSelectedItem()).toString());
+                String sql = "UPDATE usuarios SET nombre=?, apellidos=?, telefono=?, contrasena=?, rol=? WHERE correo=?";
+                PreparedStatement pstmt = con.prepareStatement(sql);
+                pstmt.setString(1, us.getNombre());
+                pstmt.setString(2, us.getApellidos());
+                pstmt.setString(3, us.getTelefono());
+                pstmt.setString(4, us.getContraseña());
+                pstmt.setString(5, us.getRol());
+                pstmt.setString(6, us.getCorreo());
+                int filas = pstmt.executeUpdate();
+                if (filas > 0) {
+                    JOptionPane.showMessageDialog(this, "Se ah Actualizado correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                    limpiarTabla();
+                    obtenerDatos();
+                    mostrarDatos();
+                    
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se pudo Actualizar", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
 //        con.close();
-    }catch(Exception ex){
-        System.out.println(ex.getMessage());
-    }
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    limpiar();
     }
       
   
