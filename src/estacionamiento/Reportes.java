@@ -3,18 +3,109 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package estacionamiento;
+import java.awt.FlowLayout;
+import java.sql.Connection;
+import java.util.Date;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
 
 /**
  *
  * @author Alexandra
  */
 public class Reportes extends javax.swing.JPanel {
+    
+    private JSpinner spinnerFecha;
+    private JButton btnReporte1;
+    private JButton btnReporte2;
+    private JButton btnReporte3;
+    private Connection con;
 
     /**
      * Creates new form Reportes
      */
     public Reportes() {
         initComponents();
+        con = ConectarBD.Conexion();
+        construirPanelReportes();
+
+    }
+    
+    private void construirPanelReportes() {
+        JPanel p = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 15));
+        p.setBackground(getBackground());
+        p.add(new JLabel("Fecha:"));
+        spinnerFecha = new JSpinner(new SpinnerDateModel(new Date(), null, null, java.util.Calendar.DAY_OF_MONTH));
+        JSpinner.DateEditor editor = new JSpinner.DateEditor(spinnerFecha, "dd/MM/yyyy");
+        spinnerFecha.setEditor(editor);
+        spinnerFecha.setPreferredSize(new java.awt.Dimension(120, 28));
+        p.add(spinnerFecha);
+
+        btnReporte1 = new JButton("1. Registros terminados por día");
+        btnReporte1.addActionListener(e -> generarReporte1());
+        p.add(btnReporte1);
+
+        btnReporte2 = new JButton("2. Ganancias del día");
+        btnReporte2.addActionListener(e -> generarReporte2());
+        p.add(btnReporte2);
+
+        btnReporte3 = new JButton("3. Automóviles del día");
+        btnReporte3.addActionListener(e -> generarReporte3());
+        p.add(btnReporte3);
+
+        p.setBounds(40, 115, 800, 50);
+        add(p);
+    }
+
+    private java.sql.Date obtenerFechaSeleccionada() {
+        Date d = (Date) spinnerFecha.getValue();
+        return d != null ? new java.sql.Date(d.getTime()) : new java.sql.Date(System.currentTimeMillis());
+    }
+
+    private void generarReporte1() {
+        if (con == null) {
+            JOptionPane.showMessageDialog(this, "No hay conexión a la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String ruta = Reportespdf.generarReporteRegistrosTerminados(con, obtenerFechaSeleccionada());
+        if (ruta != null) {
+            JOptionPane.showMessageDialog(this, "Reporte guardado en:\n" + ruta);
+            GeneradorTickets.abrirPDF(ruta);
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo generar el reporte.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void generarReporte2() {
+        if (con == null) {
+            JOptionPane.showMessageDialog(this, "No hay conexión a la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String ruta = Reportespdf.generarReporteGananciasDia(con, obtenerFechaSeleccionada());
+        if (ruta != null) {
+            JOptionPane.showMessageDialog(this, "Reporte guardado en:\n" + ruta);
+            GeneradorTickets.abrirPDF(ruta);
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo generar el reporte.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void generarReporte3() {
+        if (con == null) {
+            JOptionPane.showMessageDialog(this, "No hay conexión a la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String ruta = Reportespdf.generarReporteAutomovilesDia(con, obtenerFechaSeleccionada());
+        if (ruta != null) {
+            JOptionPane.showMessageDialog(this, "Reporte guardado en:\n" + ruta);
+            GeneradorTickets.abrirPDF(ruta);
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo generar el reporte.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**

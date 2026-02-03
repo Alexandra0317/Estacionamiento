@@ -11,11 +11,12 @@ import java.sql.Statement;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -34,6 +35,21 @@ public class Salida_Automovil extends javax.swing.JPanel {
         initComponents();
         con = ConectarBD.Conexion();
         cargarTiposVehiculo();
+        agregarListenersCalculo();
+    }
+    
+    private void agregarListenersCalculo() {
+        DocumentListener docListener = new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) { calcularTotal(); }
+            @Override
+            public void removeUpdate(DocumentEvent e) { calcularTotal(); }
+            @Override
+            public void changedUpdate(DocumentEvent e) { calcularTotal(); }
+        };
+        txtH_Llegada.getDocument().addDocumentListener(docListener);
+        txtH_Salida.getDocument().addDocumentListener(docListener);
+        cboxTipo.addItemListener(e -> calcularTotal());
     }
     
     public void setPrincipal(Principal p) {
@@ -52,7 +68,6 @@ public class Salida_Automovil extends javax.swing.JPanel {
         txtPropietario = new javax.swing.JTextField();
         lbColor = new javax.swing.JLabel();
         txtH_Salida = new javax.swing.JTextField();
-        txtTotal = new javax.swing.JTextField();
         lbPropietario = new javax.swing.JLabel();
         txtH_Llegada = new javax.swing.JTextField();
         lbDescripcion = new javax.swing.JLabel();
@@ -73,6 +88,7 @@ public class Salida_Automovil extends javax.swing.JPanel {
         btnCargar1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnCancelar1 = new javax.swing.JButton();
+        txtTotal = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(178, 190, 195));
         setPreferredSize(new java.awt.Dimension(1221, 831));
@@ -221,7 +237,6 @@ public class Salida_Automovil extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(lbDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(1, 1, 1)))))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -382,7 +397,7 @@ public class Salida_Automovil extends javax.swing.JPanel {
         txtH_Llegada.setText(au.getHora_llegadaFormato());
         txtH_Salida.setText(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
         txtDescripcion.setText(au.getDescripcion() != null ? au.getDescripcion() : "");
-        txtTotal.setText(au.getTotal() != null ? au.getTotal() : "");
+        calcularTotal();
     }
     
     private void guardarSalida() {
@@ -403,12 +418,70 @@ public class Salida_Automovil extends javax.swing.JPanel {
             pstmt.setInt(5, idAutoActual);
             pstmt.executeUpdate();
             pstmt.close();
-            JOptionPane.showMessageDialog(this, "Salida registrada correctamente.");
+            String tipoStr = cboxTipo.getSelectedItem() != null ? cboxTipo.getSelectedItem().toString() : "";
+            String rutaPdf = GeneradorTickets.generarTicket(idAutoActual, txtPlacas.getText().trim(), tipoStr,
+                    txtH_Llegada.getText().trim(), txtH_Salida.getText().trim(), txtTotal.getText().trim());
+            if (rutaPdf != null) {
+                JOptionPane.showMessageDialog(this, "Salida registrada correctamente.\nTicket guardado en: " + rutaPdf);
+                GeneradorTickets.abrirPDF(rutaPdf);
+            } else {
+                JOptionPane.showMessageDialog(this, "Salida registrada correctamente.");
+            }
+//            JOptionPane.showMessageDialog(this, "Salida registrada correctamente.");
             if (principal != null) {
                 principal.volverAInicio();
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error al guardar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void calcularTotal() {
+        try {
+            LocalTime llegada = LocalTime.parse(txtH_Llegada.getText().trim(), DateTimeFormatter.ofPattern("HH:mm"));
+            LocalTime salida = LocalTime.parse(txtH_Salida.getText().trim(), DateTimeFormatter.ofPattern("HH:mm"));
+            long minutos = ChronoUnit.MINUTES.between(llegada, salida);
+            if (minutos < 0) {
+                minutos += 24 * 60;
+            }
+            double horas = minutos / 60.0;
+
+            Object tipoSel = cboxTipo.getSelectedItem();
+            if (tipoSel == null) {
+                txtTotal.setText("");
+                jLabel1.setText("$0.00");
+                return;
+            }
+            Precios precioTipo = null;
+            for (Precios p : ListaPrecio) {
+                if (p.getTipo().equals(tipoSel.toString())) {
+                    precioTipo = p;
+                    break;
+                }
+            }
+            if (precioTipo == null) {
+                txtTotal.setText("");
+                jLabel1.setText("$0.00");
+                return;
+            }
+
+            String costoStr = precioTipo.getCosto_horas().trim().replace("$", "").replace(",", ".");
+            double precioPorHora = Double.parseDouble(costoStr);
+
+            double total;
+            if (horas < 1.0) {
+                total = precioPorHora;
+            } else {
+                total = precioPorHora * horas
+                        ;
+            }
+
+            String totalFormato = String.format("%.2f", total);
+            txtTotal.setText(totalFormato);
+            jLabel1.setText("$" + totalFormato);
+        } catch (Exception e) {
+            txtTotal.setText("");
+            jLabel1.setText("$0.00");
         }
     }
     

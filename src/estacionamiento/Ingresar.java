@@ -26,6 +26,7 @@ public class Ingresar extends javax.swing.JPanel {
     public void setPrincipal(Principal p){
         this.principal = p;
     }
+    
     public Ingresar() {
         initComponents();
         con = ConectarBD.Conexion();
@@ -36,6 +37,14 @@ public class Ingresar extends javax.swing.JPanel {
     private void establecerHoraEntrada() {
         txtH_Llegada.setText(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
         txtH_Llegada.setEditable(false);
+    }
+    
+    @Override
+    public void setVisible(boolean visible){
+        super.setVisible(visible);
+        if (visible) {
+            establecerHoraEntrada();
+        }
     }
 
     /**
@@ -312,7 +321,7 @@ public class Ingresar extends javax.swing.JPanel {
         Time horaEntrada = Time.valueOf(LocalTime.parse(txtH_Llegada.getText().trim(), DateTimeFormatter.ofPattern("HH:mm")));
         Automoviles au = new Automoviles(txtPropietario.getText(), txtPlacas.getText(), txtMarca.getText(), txtColor.getText(), getIdPrecioSeleccionado(), horaEntrada, txtDescripcion.getText(), true);
         String sql ="INSERT INTO automoviles(propietario, placas, marca, color, hora_llegada, descripcion, activo, id_precio) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement pstmt = con.prepareStatement(sql);
+        PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         pstmt.setString(1, au.getPropietario());
         pstmt.setString(2, au.getPlacas());
         pstmt.setString(3, au.getMarca());
@@ -322,7 +331,25 @@ public class Ingresar extends javax.swing.JPanel {
         pstmt.setBoolean(7, au.isActivo());
         pstmt.setInt(8, au.getId_precio());
         pstmt.executeUpdate();
-        JOptionPane.showMessageDialog(this, "Registrado Correctamente");
+        int idAuto = -1;
+        try (java.sql.ResultSet rs = pstmt.getGeneratedKeys()) {
+            if (rs.next()) {
+                idAuto = rs.getInt(1);
+            }
+        }
+        pstmt.close();
+        if (idAuto > 0) {
+            String tipoStr = cboxTipo.getSelectedItem() != null ? cboxTipo.getSelectedItem().toString() : "";
+            String rutaPdf = GeneradorTickets.generarPreticket(idAuto, au.getPlacas(), tipoStr, txtH_Llegada.getText().trim());
+            if (rutaPdf != null) {
+                JOptionPane.showMessageDialog(this, "Registrado correctamente.\nPreticket guardado en: " + rutaPdf);
+                GeneradorTickets.abrirPDF(rutaPdf);
+            } else {
+                JOptionPane.showMessageDialog(this, "Registrado correctamente.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Registrado Correctamente");
+        } 
         if(principal != null){
             principal.volverAInicio();
         }

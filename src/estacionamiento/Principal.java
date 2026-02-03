@@ -72,12 +72,12 @@ public class Principal extends javax.swing.JFrame {
         btnReportes = new javax.swing.JButton();
         pnInicio = new javax.swing.JPanel();
         btnBuscar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbAutomoviles = new javax.swing.JTable();
         txtBuscar = new javax.swing.JTextField();
         pnTitulo = new javax.swing.JPanel();
         lbTitulo3 = new javax.swing.JLabel();
         lbHora = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbAutomoviles = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(500, 410));
@@ -240,23 +240,6 @@ public class Principal extends javax.swing.JFrame {
         pnInicio.add(btnBuscar);
         btnBuscar.setBounds(990, 140, 130, 30);
 
-        tbAutomoviles.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        tbAutomoviles.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID_auto", "Propietario", "Placas", "Marca", "Color", "Tipo", "Descripcion", "Hora_llegada"
-            }
-        ));
-        tbAutomoviles.setToolTipText("");
-        tbAutomoviles.setPreferredSize(new java.awt.Dimension(500, 150));
-        tbAutomoviles.setRowHeight(35);
-        jScrollPane1.setViewportView(tbAutomoviles);
-
-        pnInicio.add(jScrollPane1);
-        jScrollPane1.setBounds(60, 200, 1060, 550);
-
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarKeyReleased(evt);
@@ -302,6 +285,20 @@ public class Principal extends javax.swing.JFrame {
 
         pnInicio.add(pnTitulo);
         pnTitulo.setBounds(0, 20, 1230, 90);
+
+        tbAutomoviles.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID_auto", "Propietario", "Placas", "Marca", "Color", "Tipo", "Descripcion", "Hora_llegada"
+            }
+        ));
+        tbAutomoviles.setRowHeight(35);
+        jScrollPane2.setViewportView(tbAutomoviles);
+
+        pnInicio.add(jScrollPane2);
+        jScrollPane2.setBounds(50, 200, 1070, 530);
 
         getContentPane().add(pnInicio, java.awt.BorderLayout.CENTER);
 
@@ -434,7 +431,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnReportes;
     private javax.swing.JButton btnSalida;
     private javax.swing.JButton jButton1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     public static javax.swing.JLabel lbBienvenida;
     public static javax.swing.JLabel lbHora;
     private javax.swing.JLabel lbTitulo3;

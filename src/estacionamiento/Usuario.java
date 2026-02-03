@@ -480,11 +480,11 @@ public class Usuario extends javax.swing.JPanel {
         
         
     public void eliminarU() {
-        if (txtCorreo.getText().equals("admin@gmail.com")) {
-            JOptionPane.showInternalMessageDialog(null, "No se Puede Eliminar ADMINISTRADOR", "Aviso", JOptionPane.WARNING_MESSAGE);
-        } else {
-            seleccionar();
-            if (siSelect) {
+        seleccionar();
+        if (siSelect) {
+            if (usuSeleccionado.getCorreo().equals("admin@gmail.com")) {
+                JOptionPane.showInternalMessageDialog(null, "No se Puede Eliminar ADMINISTRADOR", "Aviso", JOptionPane.WARNING_MESSAGE);
+            } else {
                 int fila = tbUsuarios.getSelectedRow();
                 int id = Integer.parseInt(tbUsuarios.getValueAt(fila, 0).toString());
                 int confirmar = JOptionPane.showConfirmDialog(this, "¿Está seguro de que desea eliminar este Operador?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
